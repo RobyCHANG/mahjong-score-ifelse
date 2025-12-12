@@ -163,28 +163,35 @@
     background: var(--color-bg-secondary);
 }
 
-/* 标题区域 */
-.header {
+/* 卡片內標題區域 */
+.card-header {
     text-align: center;
-    margin-bottom: 32px;
+    padding-bottom: 20px;
 }
 
-.header__icon {
-    font-size: 48px;
+.card-header__icon {
+    font-size: 56px;
     margin-bottom: 12px;
 }
 
-.header__title {
-    font-size: 26px;
+.card-header__title {
+    font-size: 24px;
     font-weight: 700;
     letter-spacing: -0.02em;
     color: var(--color-text-primary);
 }
 
-.header__subtitle {
-    font-size: 14px;
+.card-header__subtitle {
+    font-size: 13px;
     color: var(--color-text-muted);
     margin-top: 6px;
+}
+
+/* 卡片分隔線 */
+.card-divider {
+    height: 1px;
+    background: var(--glass-border);
+    margin: 0 -28px 24px -28px;
 }
 
 /* 卡片容器 */
@@ -195,6 +202,16 @@
     padding: 28px;
     backdrop-filter: blur(20px);
     box-shadow: var(--glass-shadow);
+}
+
+/* 麻將牌風格卡片 */
+.mahjong-card {
+    position: relative;
+    border-radius: 20px;
+    box-shadow:
+        0 4px 6px rgba(0, 0, 0, 0.05),
+        0 10px 40px rgba(0, 0, 0, 0.1),
+        inset 0 1px 0 rgba(255, 255, 255, 0.1);
 }
 
 /* 步骤区域 */

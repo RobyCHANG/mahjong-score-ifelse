@@ -275,15 +275,17 @@ function App() {
                 </div>
             </div>
 
-            {/* 标题 */}
-            <header className="header">
-                <div className="header__icon">🀄</div>
-                <h1 className="header__title">{t.appTitle}</h1>
-                <p className="header__subtitle">{t.appSubtitle}</p>
-            </header>
+            {/* 主卡片 - 標題和內容整合為一體 */}
+            <main className="card mahjong-card">
+                {/* 標題區域 */}
+                <header className="card-header">
+                    <div className="card-header__icon">🀄</div>
+                    <h1 className="card-header__title">{t.appTitle}</h1>
+                    <p className="card-header__subtitle">{t.appSubtitle}</p>
+                </header>
 
-            {/* 主卡片 */}
-            <main className="card">
+                <div className="card-divider"></div>
+
                 {/* 步骤 1: 身份 */}
                 <section className="step">
                     <div className="step__label">
