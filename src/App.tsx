@@ -168,11 +168,6 @@ function App() {
         setResult(null);
     };
 
-    // 切換主題
-    const toggleTheme = () => {
-        setTheme(prev => prev === 'light' ? 'dark' : 'light');
-    };
-
     // 渲染選項按鈕組
     const renderOptions = <T,>(
         options: OptionConfig<T>[],
@@ -235,29 +230,49 @@ function App() {
     // 判斷是否可以選牌型
     const canSelectPattern = jingSelectionComplete;
 
+    // 主題選項
+    const themeOptions = [
+        { value: 'light', label: language === 'zh-CN' ? '☀️ 浅色' : '☀️ 淺色' },
+        { value: 'dark', label: '🌙 ' + (language === 'zh-CN' ? '深色' : '深色') },
+    ];
+
+    // 模式選項
+    const modeOptions = AVAILABLE_MODES.map(m => ({
+        value: m.value,
+        label: m.label[language],
+    }));
+
     return (
         <div className="app">
-            {/* 頂部工具欄 */}
-            <div className="toolbar">
-                {/* 模式顯示 */}
-                <span className="toolbar-label">
-                    {AVAILABLE_MODES.find(m => m.value === mode)?.label[language]}
-                </span>
-
-                {/* 語言選擇 - 自定義下拉組件 */}
-                <CustomSelect
-                    options={[
-                        { value: 'zh-CN', label: '简体' },
-                        { value: 'zh-TW', label: '繁體' },
-                    ]}
-                    value={language}
-                    onChange={(v) => setLanguage(v as Language)}
-                />
-
-                {/* 日夜模式切換 */}
-                <button className="toolbar-btn" onClick={toggleTheme}>
-                    {theme === 'light' ? '🌙' : '☀️'}
-                </button>
+            {/* 設置卡片 */}
+            <div className="settings-card">
+                <div className="settings-row">
+                    <span className="settings-label">🀄 {language === 'zh-CN' ? '模式' : '模式'}</span>
+                    <CustomSelect
+                        options={modeOptions}
+                        value={mode}
+                        onChange={(v) => setMode(v as MahjongMode)}
+                    />
+                </div>
+                <div className="settings-row">
+                    <span className="settings-label">{language === 'zh-CN' ? '语言' : '語言'}</span>
+                    <CustomSelect
+                        options={[
+                            { value: 'zh-CN', label: '简体中文' },
+                            { value: 'zh-TW', label: '繁體中文' },
+                        ]}
+                        value={language}
+                        onChange={(v) => setLanguage(v as Language)}
+                    />
+                </div>
+                <div className="settings-row">
+                    <span className="settings-label">{language === 'zh-CN' ? '主题' : '主題'}</span>
+                    <CustomSelect
+                        options={themeOptions}
+                        value={theme}
+                        onChange={(v) => setTheme(v as Theme)}
+                    />
+                </div>
             </div>
 
             {/* 标题 */}
