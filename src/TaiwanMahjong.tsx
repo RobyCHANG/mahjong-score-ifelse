@@ -49,11 +49,25 @@ export function TaiwanMahjong({ language }: TaiwanMahjongProps) {
                 return prev.filter(i => i !== id);
             }
 
-            // 特殊邏輯：門清自摸與門清/自摸互斥
+            // 特殊邏輯：門清自摸與門清/自摸
             if (id === 'menQingSelfDraw') {
+                // 選門清自摸時，移除單獨的門清和自摸
                 return [...prev.filter(i => i !== 'menQing' && i !== 'selfDraw'), id];
             }
-            if (id === 'menQing' || id === 'selfDraw') {
+
+            // 選自摸時，如果已經有門清，自動轉換為門清自摸
+            if (id === 'selfDraw') {
+                if (prev.includes('menQing')) {
+                    return [...prev.filter(i => i !== 'menQing' && i !== 'menQingSelfDraw'), 'menQingSelfDraw'];
+                }
+                return [...prev.filter(i => i !== 'menQingSelfDraw'), id];
+            }
+
+            // 選門清時，如果已經有自摸，自動轉換為門清自摸
+            if (id === 'menQing') {
+                if (prev.includes('selfDraw')) {
+                    return [...prev.filter(i => i !== 'selfDraw' && i !== 'menQingSelfDraw'), 'menQingSelfDraw'];
+                }
                 return [...prev.filter(i => i !== 'menQingSelfDraw'), id];
             }
 
