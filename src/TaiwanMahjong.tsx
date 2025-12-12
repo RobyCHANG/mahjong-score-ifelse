@@ -82,8 +82,8 @@ export function TaiwanMahjong({ language }: TaiwanMahjongProps) {
     );
 
     const t = {
-        title: language === 'zh-CN' ? '台湾16张麻将计分器' : '台灣16張麻將計分器',
-        subtitle: language === 'zh-CN' ? '勾选适用条件，自动计算台数' : '勾選適用條件，自動計算台數',
+        title: language === 'zh-CN' ? '麻将计分器' : '麻將計分器',
+        subtitle: language === 'zh-CN' ? '台湾16张 · 勾选适用条件' : '台灣16張 · 勾選適用條件',
         dealer: language === 'zh-CN' ? '庄家 / 连庄' : '莊家 / 連莊',
         win: language === 'zh-CN' ? '胡牌方式' : '胡牌方式',
         pattern: language === 'zh-CN' ? '牌型' : '牌型',

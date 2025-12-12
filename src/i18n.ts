@@ -74,8 +74,8 @@ interface Translations {
 
 const translations: Record<Language, Translations> = {
     'zh-CN': {
-        appTitle: '南昌麻将计分器',
-        appSubtitle: '快速计算胡牌得分',
+        appTitle: '麻将计分器',
+        appSubtitle: '南昌麻将 · 快速计算胡牌得分',
 
         step1Title: '选择身份',
         step2Title: '胡牌方式',
@@ -131,8 +131,8 @@ const translations: Record<Language, Translations> = {
         nanchangMode: '南昌麻将',
     },
     'zh-TW': {
-        appTitle: '南昌麻將計分器',
-        appSubtitle: '快速計算胡牌得分',
+        appTitle: '麻將計分器',
+        appSubtitle: '南昌麻將 · 快速計算胡牌得分',
 
         step1Title: '選擇身份',
         step2Title: '胡牌方式',
