@@ -7,6 +7,7 @@ import {
 } from './types';
 import { calculateScore, applyJingBonus, ScoreResult } from './scoreCalculator';
 import { Language, MahjongMode, getTranslations, AVAILABLE_MODES } from './i18n';
+import { CustomSelect } from './CustomSelect';
 import './App.css';
 
 // 正精數量選項 (0-3)
@@ -238,35 +239,25 @@ function App() {
         <div className="app">
             {/* 頂部工具欄 */}
             <div className="toolbar">
-                {/* 模式選擇 - 下拉式 */}
-                <select
-                    className="select-dropdown"
-                    value={mode}
-                    onChange={(e) => setMode(e.target.value as MahjongMode)}
-                >
-                    {AVAILABLE_MODES.map(m => (
-                        <option key={m.value} value={m.value}>
-                            🀄 {m.label[language]}
-                        </option>
-                    ))}
-                </select>
+                {/* 模式顯示 */}
+                <span className="toolbar-label">
+                    {AVAILABLE_MODES.find(m => m.value === mode)?.label[language]}
+                </span>
 
-                <div className="toolbar__right">
-                    {/* 語言選擇 - 下拉式 */}
-                    <select
-                        className="select-dropdown select-dropdown--small"
-                        value={language}
-                        onChange={(e) => setLanguage(e.target.value as Language)}
-                    >
-                        <option value="zh-CN">简体</option>
-                        <option value="zh-TW">繁體</option>
-                    </select>
+                {/* 語言選擇 - 自定義下拉組件 */}
+                <CustomSelect
+                    options={[
+                        { value: 'zh-CN', label: '简体' },
+                        { value: 'zh-TW', label: '繁體' },
+                    ]}
+                    value={language}
+                    onChange={(v) => setLanguage(v as Language)}
+                />
 
-                    {/* 日夜模式切換 */}
-                    <button className="theme-toggle" onClick={toggleTheme}>
-                        {theme === 'light' ? '🌙' : '☀️'}
-                    </button>
-                </div>
+                {/* 日夜模式切換 */}
+                <button className="toolbar-btn" onClick={toggleTheme}>
+                    {theme === 'light' ? '🌙' : '☀️'}
+                </button>
             </div>
 
             {/* 标题 */}
