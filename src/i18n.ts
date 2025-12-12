@@ -2,7 +2,7 @@
 export type Language = 'zh-CN' | 'zh-TW';
 
 // 麻將模式
-export type MahjongMode = 'nanchang';
+export type MahjongMode = 'nanchang' | 'taiwan';
 
 // 翻譯文本
 interface Translations {
@@ -200,4 +200,5 @@ export const AVAILABLE_LANGUAGES: { value: Language; label: string }[] = [
 
 export const AVAILABLE_MODES: { value: MahjongMode; label: Record<Language, string> }[] = [
     { value: 'nanchang', label: { 'zh-CN': '南昌麻将', 'zh-TW': '南昌麻將' } },
+    { value: 'taiwan', label: { 'zh-CN': '台湾16张麻将', 'zh-TW': '台灣16張麻將' } },
 ];

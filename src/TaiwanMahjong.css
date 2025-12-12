@@ -1,0 +1,212 @@
+/* 台灣麻將樣式 */
+
+.taiwan-mahjong {
+    width: 100%;
+}
+
+/* 區塊 */
+.tw-section {
+    margin-bottom: 24px;
+}
+
+.tw-section__title {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--color-text-primary);
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+/* 選項容器 */
+.tw-options {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 8px;
+}
+
+.tw-options--3col {
+    grid-template-columns: repeat(3, 1fr);
+}
+
+/* Checkbox 選項 */
+.tw-checkbox {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 12px;
+    background: var(--color-bg-tertiary);
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius-md);
+    cursor: pointer;
+    transition: all var(--transition-fast);
+}
+
+.tw-checkbox:hover {
+    border-color: var(--color-accent);
+}
+
+.tw-checkbox--checked {
+    border-color: var(--color-accent);
+    background: var(--color-bg-secondary);
+}
+
+.tw-checkbox input {
+    display: none;
+}
+
+.tw-checkbox__box {
+    width: 18px;
+    height: 18px;
+    border: 2px solid var(--color-text-muted);
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    transition: all var(--transition-fast);
+}
+
+.tw-checkbox--checked .tw-checkbox__box {
+    background: var(--color-accent);
+    border-color: var(--color-accent);
+}
+
+.tw-checkbox--checked .tw-checkbox__box::after {
+    content: '✓';
+    color: white;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.tw-checkbox__content {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    min-width: 0;
+}
+
+.tw-checkbox__label {
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--color-text-primary);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.tw-checkbox__tai {
+    font-size: 11px;
+    color: var(--color-accent);
+    font-weight: 600;
+}
+
+/* 花牌選擇器 */
+.tw-flower-selector {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.tw-flower-btn {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--color-bg-tertiary);
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius-md);
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--color-text-primary);
+    cursor: pointer;
+    transition: all var(--transition-fast);
+}
+
+.tw-flower-btn:hover {
+    border-color: var(--color-accent);
+}
+
+.tw-flower-btn--active {
+    background: var(--color-accent);
+    border-color: var(--color-accent);
+    color: white;
+}
+
+/* 結果 */
+.tw-result {
+    margin-top: 24px;
+    padding: 20px;
+    background: var(--color-bg-tertiary);
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius-lg);
+    animation: scaleIn 0.3s ease-out;
+}
+
+.tw-result__label {
+    font-size: 12px;
+    color: var(--color-text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-bottom: 12px;
+    text-align: center;
+}
+
+.tw-result__total {
+    display: flex;
+    align-items: baseline;
+    justify-content: center;
+    gap: 8px;
+    margin-bottom: 16px;
+}
+
+.tw-result__number {
+    font-size: 48px;
+    font-weight: 700;
+    color: var(--color-accent);
+}
+
+.tw-result__unit {
+    font-size: 16px;
+    color: var(--color-text-secondary);
+}
+
+/* 明細 */
+.tw-result__breakdown {
+    border-top: 1px solid var(--glass-border);
+    padding-top: 12px;
+}
+
+.tw-result__item {
+    display: flex;
+    justify-content: space-between;
+    padding: 6px 0;
+    font-size: 13px;
+    color: var(--color-text-secondary);
+}
+
+.tw-result__item span:last-child {
+    color: var(--color-accent);
+    font-weight: 500;
+}
+
+/* 響應式 */
+@media (max-width: 480px) {
+    .tw-options {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .tw-options--3col {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .tw-checkbox {
+        padding: 8px 10px;
+    }
+
+    .tw-checkbox__label {
+        font-size: 12px;
+    }
+}
