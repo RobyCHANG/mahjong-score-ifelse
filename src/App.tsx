@@ -6,7 +6,7 @@ import {
     OptionConfig,
 } from './types';
 import { calculateScore, applyJingBonus, ScoreResult } from './scoreCalculator';
-import { Language, MahjongMode, getTranslations, AVAILABLE_LANGUAGES, AVAILABLE_MODES } from './i18n';
+import { Language, MahjongMode, getTranslations, AVAILABLE_MODES } from './i18n';
 import './App.css';
 
 // 正精數量選項 (0-3)
@@ -228,26 +228,14 @@ function App() {
         <div className="app">
             {/* 頂部工具欄 */}
             <div className="toolbar">
-                {/* 模式選擇 */}
-                <div className="toolbar__mode">
-                    <select
-                        value={mode}
-                        onChange={(e) => setMode(e.target.value as MahjongMode)}
-                        className="mode-select"
-                    >
-                        {AVAILABLE_MODES.map(m => (
-                            <option key={m.value} value={m.value}>
-                                {m.label[language]}
-                            </option>
-                        ))}
-                    </select>
+                {/* 模式顯示 */}
+                <div className="toolbar__badge">
+                    🀄 {AVAILABLE_MODES.find(m => m.value === mode)?.label[language]}
                 </div>
 
                 {/* 語言切換 */}
-                <button className="lang-toggle" onClick={toggleLanguage}>
-                    {AVAILABLE_LANGUAGES.find(l => l.value === language)?.label}
-                    <span className="lang-toggle__icon">⇄</span>
-                    {AVAILABLE_LANGUAGES.find(l => l.value !== language)?.label}
+                <button className="toolbar__btn" onClick={toggleLanguage}>
+                    {language === 'zh-CN' ? '繁' : '简'}
                 </button>
             </div>
 
