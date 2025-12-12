@@ -8,6 +8,7 @@ import {
 import { calculateScore, applyJingBonus, ScoreResult } from './scoreCalculator';
 import { Language, MahjongMode, getTranslations, AVAILABLE_MODES } from './i18n';
 import { CustomSelect } from './CustomSelect';
+import { TaiwanMahjong } from './TaiwanMahjong';
 import './App.css';
 
 // 正精數量選項 (0-3)
@@ -277,101 +278,108 @@ function App() {
 
             {/* 主卡片 - 標題和內容整合為一體 */}
             <main className="card mahjong-card">
-                {/* 標題區域 */}
-                <header className="card-header">
-                    <div className="card-header__icon">🀄</div>
-                    <h1 className="card-header__title">{t.appTitle}</h1>
-                    <p className="card-header__subtitle">{t.appSubtitle}</p>
-                </header>
-
-                <div className="card-divider"></div>
-
-                {/* 步骤 1: 身份 */}
-                <section className="step">
-                    <div className="step__label">
-                        <span className="step__number">1</span>
-                        <span className="step__title">{t.step1Title}</span>
-                    </div>
-                    {renderOptions(ROLE_OPTIONS, role, setRole)}
-                </section>
-
-                {/* 步骤 2: 胡牌方式 */}
-                <section className={`step ${!role ? 'step--disabled' : ''}`}>
-                    <div className="step__label">
-                        <span className="step__number">2</span>
-                        <span className="step__title">{t.step2Title}</span>
-                    </div>
-                    {role && renderOptions(availableWinEvents, winEvent, setWinEvent)}
-                </section>
-
-                {/* 步骤 3: 有无精 */}
-                <section className={`step ${!winEvent ? 'step--disabled' : ''}`}>
-                    <div className="step__label">
-                        <span className="step__number">3</span>
-                        <span className="step__title">{t.step3Title}</span>
-                    </div>
-                    {winEvent && renderOptions(JING_OPTIONS, hasJing, setHasJing)}
-                </section>
-
-                {/* 步骤 3.5: 精的數量 */}
-                {showJingCountStep && (
-                    <section className="step jing-step">
-                        <div className="step__label">
-                            <span className="step__number">✦</span>
-                            <span className="step__title">{t.jingStepTitle}</span>
-                        </div>
-
-                        <div className="jing-selectors">
-                            <div className="jing-selector">
-                                <span className="jing-selector__label">{t.zhengJing}</span>
-                                {renderOptions(ZHENG_JING_OPTIONS, zhengJingCount, setZhengJingCount, 4)}
-                            </div>
-                            <div className="jing-selector">
-                                <span className="jing-selector__label">{t.fuJing}</span>
-                                {renderOptions(FU_JING_OPTIONS, fuJingCount, setFuJingCount, 4)}
-                            </div>
-                        </div>
-
-                        {zhengJingCount !== null && fuJingCount !== null && (
-                            <div className="jing-total">
-                                {t.jingTotal}: {zhengJingCount}×2 + {fuJingCount}×1 = <strong>+{totalJingBonus}</strong>
-                            </div>
-                        )}
-                    </section>
-                )}
-
-                {/* 步骤 4: 牌型 */}
-                <section className={`step ${!canSelectPattern ? 'step--disabled' : ''}`}>
-                    <div className="step__label">
-                        <span className="step__number">4</span>
-                        <span className="step__title">{t.step4Title}</span>
-                    </div>
-                    {canSelectPattern && renderOptions(availablePatterns, pattern, setPattern, 3)}
-                </section>
-
-                {/* 结果 */}
-                {result ? (
-                    <div className="result">
-                        <div className="result__label">{t.resultLabel}</div>
-                        {renderResult(result)}
-                        {hasJing && totalJingBonus > 0 && (
-                            <div className="result__note">
-                                {t.jingBonusNote} (+{totalJingBonus})
-                            </div>
-                        )}
-                    </div>
+                {/* 根據模式顯示不同內容 */}
+                {mode === 'taiwan' ? (
+                    <TaiwanMahjong language={language} />
                 ) : (
-                    role && winEvent && canSelectPattern && pattern && (
-                        <div className="no-result">{t.noResult}</div>
-                    )
-                )}
+                    <>
+                        {/* 標題區域 */}
+                        <header className="card-header">
+                            <div className="card-header__icon">🀄</div>
+                            <h1 className="card-header__title">{t.appTitle}</h1>
+                            <p className="card-header__subtitle">{t.appSubtitle}</p>
+                        </header>
 
-                {/* 重置按钮 */}
-                {(role || winEvent || hasJing !== null || pattern) && (
-                    <button className="reset-btn" onClick={handleReset}>
-                        <span>↻</span>
-                        <span>{t.reset}</span>
-                    </button>
+                        <div className="card-divider"></div>
+
+                        {/* 步骤 1: 身份 */}
+                        <section className="step">
+                            <div className="step__label">
+                                <span className="step__number">1</span>
+                                <span className="step__title">{t.step1Title}</span>
+                            </div>
+                            {renderOptions(ROLE_OPTIONS, role, setRole)}
+                        </section>
+
+                        {/* 步骤 2: 胡牌方式 */}
+                        <section className={`step ${!role ? 'step--disabled' : ''}`}>
+                            <div className="step__label">
+                                <span className="step__number">2</span>
+                                <span className="step__title">{t.step2Title}</span>
+                            </div>
+                            {role && renderOptions(availableWinEvents, winEvent, setWinEvent)}
+                        </section>
+
+                        {/* 步骤 3: 有无精 */}
+                        <section className={`step ${!winEvent ? 'step--disabled' : ''}`}>
+                            <div className="step__label">
+                                <span className="step__number">3</span>
+                                <span className="step__title">{t.step3Title}</span>
+                            </div>
+                            {winEvent && renderOptions(JING_OPTIONS, hasJing, setHasJing)}
+                        </section>
+
+                        {/* 步骤 3.5: 精的數量 */}
+                        {showJingCountStep && (
+                            <section className="step jing-step">
+                                <div className="step__label">
+                                    <span className="step__number">✦</span>
+                                    <span className="step__title">{t.jingStepTitle}</span>
+                                </div>
+
+                                <div className="jing-selectors">
+                                    <div className="jing-selector">
+                                        <span className="jing-selector__label">{t.zhengJing}</span>
+                                        {renderOptions(ZHENG_JING_OPTIONS, zhengJingCount, setZhengJingCount, 4)}
+                                    </div>
+                                    <div className="jing-selector">
+                                        <span className="jing-selector__label">{t.fuJing}</span>
+                                        {renderOptions(FU_JING_OPTIONS, fuJingCount, setFuJingCount, 4)}
+                                    </div>
+                                </div>
+
+                                {zhengJingCount !== null && fuJingCount !== null && (
+                                    <div className="jing-total">
+                                        {t.jingTotal}: {zhengJingCount}×2 + {fuJingCount}×1 = <strong>+{totalJingBonus}</strong>
+                                    </div>
+                                )}
+                            </section>
+                        )}
+
+                        {/* 步骤 4: 牌型 */}
+                        <section className={`step ${!canSelectPattern ? 'step--disabled' : ''}`}>
+                            <div className="step__label">
+                                <span className="step__number">4</span>
+                                <span className="step__title">{t.step4Title}</span>
+                            </div>
+                            {canSelectPattern && renderOptions(availablePatterns, pattern, setPattern, 3)}
+                        </section>
+
+                        {/* 结果 */}
+                        {result ? (
+                            <div className="result">
+                                <div className="result__label">{t.resultLabel}</div>
+                                {renderResult(result)}
+                                {hasJing && totalJingBonus > 0 && (
+                                    <div className="result__note">
+                                        {t.jingBonusNote} (+{totalJingBonus})
+                                    </div>
+                                )}
+                            </div>
+                        ) : (
+                            role && winEvent && canSelectPattern && pattern && (
+                                <div className="no-result">{t.noResult}</div>
+                            )
+                        )}
+
+                        {/* 重置按钮 */}
+                        {(role || winEvent || hasJing !== null || pattern) && (
+                            <button className="reset-btn" onClick={handleReset}>
+                                <span>↻</span>
+                                <span>{t.reset}</span>
+                            </button>
+                        )}
+                    </>
                 )}
             </main>
         </div>
