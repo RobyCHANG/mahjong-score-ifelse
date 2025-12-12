@@ -168,6 +168,31 @@
     text-align: center;
 }
 
+/* 精選擇器 */
+.tw-jing-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 12px;
+}
+
+.tw-jing-label {
+    font-size: 13px;
+    color: var(--color-text-secondary);
+    min-width: 80px;
+}
+
+.tw-jing-total {
+    margin-top: 8px;
+    padding: 8px 12px;
+    background: var(--color-bg-tertiary);
+    border-radius: var(--radius-md);
+    font-size: 13px;
+    color: var(--color-accent);
+    font-weight: 600;
+    text-align: center;
+}
+
 /* 花牌選擇器 */
 .tw-flower-selector {
     display: flex;

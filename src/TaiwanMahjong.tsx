@@ -61,12 +61,16 @@ export function TaiwanMahjong({ language }: TaiwanMahjongProps) {
                 return [...prev.filter(i => !dealerIds.includes(i)), id];
             }
 
-            // 天胡/地胡互斥
-            if (id === 'tianHu') {
-                return [...prev.filter(i => i !== 'diHu'), id];
+            // 牌型互斥（只能選一個）
+            const patternIds = ['qingYiSe', 'hunYiSe', 'duiDuiHu', 'qiDuiZi', 'daSanYuan', 'xiaoSanYuan', 'ziYiSe'];
+            if (patternIds.includes(id)) {
+                return [...prev.filter(i => !patternIds.includes(i)), id];
             }
-            if (id === 'diHu') {
-                return [...prev.filter(i => i !== 'tianHu'), id];
+
+            // 特殊情況互斥（只能選一個）
+            const specialIds = ['tianHu', 'diHu', 'renHu', 'haiDiLaoYue', 'heDiLaoYu', 'qiangGang'];
+            if (specialIds.includes(id)) {
+                return [...prev.filter(i => !specialIds.includes(i)), id];
             }
 
             return [...prev, id];
