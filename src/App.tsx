@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Language, MahjongMode, getTranslations, AVAILABLE_MODES } from './i18n';
+import { Language, MahjongMode, AVAILABLE_MODES } from './i18n';
 import { CustomSelect } from './CustomSelect';
 import { TaiwanMahjong } from './TaiwanMahjong';
 import { NanchangMahjong } from './NanchangMahjong';
