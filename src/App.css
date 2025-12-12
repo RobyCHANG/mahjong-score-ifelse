@@ -1,0 +1,512 @@
+/* ================================================
+   南昌麻将计分器 - 组件样式
+   ================================================ */
+
+/* 主容器 */
+.app {
+    width: 100%;
+    max-width: 480px;
+    animation: fadeInUp 0.6s ease-out;
+}
+
+/* 頂部工具欄 */
+.toolbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    padding: 0 4px;
+}
+
+.toolbar__mode {
+    flex: 1;
+}
+
+.mode-select {
+    background: var(--color-bg-tertiary);
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius-sm);
+    color: var(--color-text-primary);
+    font-size: 13px;
+    font-family: inherit;
+    padding: 8px 12px;
+    cursor: pointer;
+    transition: all var(--transition-fast);
+}
+
+.mode-select:hover {
+    border-color: var(--color-jade);
+}
+
+.mode-select:focus {
+    outline: none;
+    border-color: var(--color-jade);
+}
+
+.mode-select option {
+    background: var(--color-bg-secondary);
+    color: var(--color-text-primary);
+}
+
+.lang-toggle {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    background: var(--color-bg-tertiary);
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius-sm);
+    color: var(--color-text-secondary);
+    font-size: 12px;
+    font-family: inherit;
+    padding: 8px 12px;
+    cursor: pointer;
+    transition: all var(--transition-fast);
+}
+
+.lang-toggle:hover {
+    border-color: var(--color-jade);
+    color: var(--color-text-primary);
+}
+
+.lang-toggle__icon {
+    color: var(--color-jade);
+    font-size: 14px;
+}
+
+/* 标题区域 */
+.header {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.header__icon {
+    font-size: 48px;
+    margin-bottom: 16px;
+    filter: drop-shadow(0 0 20px rgba(16, 185, 129, 0.3));
+}
+
+.header__title {
+    font-size: 28px;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    background: linear-gradient(135deg, var(--color-text-primary) 0%, var(--color-jade-light) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.header__subtitle {
+    font-size: 14px;
+    color: var(--color-text-muted);
+    margin-top: 8px;
+}
+
+/* 卡片容器 */
+.card {
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius-xl);
+    padding: 28px;
+    backdrop-filter: blur(20px);
+    box-shadow: var(--glass-shadow);
+}
+
+/* 步骤区域 */
+.step {
+    margin-bottom: 28px;
+    animation: fadeInUp 0.4s ease-out;
+    animation-fill-mode: both;
+}
+
+.step:nth-child(1) {
+    animation-delay: 0ms;
+}
+
+.step:nth-child(2) {
+    animation-delay: 80ms;
+}
+
+.step:nth-child(3) {
+    animation-delay: 160ms;
+}
+
+.step:nth-child(4) {
+    animation-delay: 240ms;
+}
+
+.step:last-child {
+    margin-bottom: 0;
+}
+
+.step__label {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 14px;
+}
+
+.step__number {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 26px;
+    height: 26px;
+    background: linear-gradient(135deg, var(--color-jade) 0%, var(--color-jade-dark) 100%);
+    border-radius: 50%;
+    font-size: 13px;
+    font-weight: 600;
+    color: white;
+}
+
+.step__title {
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--color-text-primary);
+}
+
+/* 选项组 */
+.options {
+    display: grid;
+    gap: 10px;
+}
+
+.options--2col {
+    grid-template-columns: repeat(2, 1fr);
+}
+
+.options--3col {
+    grid-template-columns: repeat(3, 1fr);
+}
+
+.options--4col {
+    grid-template-columns: repeat(4, 1fr);
+}
+
+/* 选项按钮 */
+.option {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 16px 12px;
+    background: var(--color-bg-tertiary);
+    border: 1px solid transparent;
+    border-radius: var(--radius-md);
+    cursor: pointer;
+    transition: all var(--transition-normal);
+    overflow: hidden;
+}
+
+.option::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, var(--color-jade) 0%, var(--color-jade-dark) 100%);
+    opacity: 0;
+    transition: opacity var(--transition-normal);
+}
+
+.option:hover {
+    border-color: var(--color-jade);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 20px rgba(16, 185, 129, 0.15);
+}
+
+.option:hover::before {
+    opacity: 0.08;
+}
+
+.option:active {
+    transform: translateY(0);
+}
+
+.option--selected {
+    border-color: var(--color-jade);
+    background: rgba(16, 185, 129, 0.12);
+}
+
+.option--selected::before {
+    opacity: 0.15;
+}
+
+.option--selected .option__label {
+    color: var(--color-jade-light);
+}
+
+.option__label {
+    position: relative;
+    z-index: 1;
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--color-text-primary);
+    transition: color var(--transition-fast);
+}
+
+.option__desc {
+    position: relative;
+    z-index: 1;
+    font-size: 11px;
+    color: var(--color-text-muted);
+    margin-top: 4px;
+    transition: color var(--transition-fast);
+}
+
+.option--selected .option__desc {
+    color: var(--color-text-secondary);
+}
+
+/* 分隔线 */
+.divider {
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--glass-border), transparent);
+    margin: 24px 0;
+}
+
+/* 结果卡片 */
+.result {
+    margin-top: 24px;
+    padding: 24px;
+    background: linear-gradient(135deg, rgba(16, 185, 129, 0.1) 0%, rgba(251, 191, 36, 0.05) 100%);
+    border: 1px solid rgba(16, 185, 129, 0.2);
+    border-radius: var(--radius-lg);
+    text-align: center;
+    animation: scaleIn 0.3s ease-out;
+}
+
+.result__label {
+    font-size: 13px;
+    color: var(--color-text-secondary);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-bottom: 12px;
+}
+
+.result__value {
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--color-gold);
+    line-height: 1.4;
+    text-shadow: 0 0 30px rgba(251, 191, 36, 0.3);
+}
+
+/* 結算詳情 */
+.result-details {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.result-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 16px;
+    background: rgba(255, 255, 255, 0.03);
+    border-radius: var(--radius-sm);
+}
+
+.result-row__label {
+    font-size: 14px;
+    color: var(--color-text-secondary);
+}
+
+.result-row__value {
+    font-size: 22px;
+    font-weight: 700;
+}
+
+.result-row__value--dealer {
+    color: #f87171;
+}
+
+.result-row__value--nondealer {
+    color: var(--color-jade-light);
+}
+
+.result-row__value--discard {
+    color: var(--color-gold);
+}
+
+.result__note {
+    font-size: 12px;
+    color: var(--color-text-muted);
+    margin-top: 10px;
+}
+
+/* 精選擇器區域 */
+.jing-step {
+    background: rgba(255, 255, 255, 0.02);
+    border-radius: var(--radius-md);
+    padding: 16px;
+    margin-left: -8px;
+    margin-right: -8px;
+}
+
+.jing-selectors {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.jing-selector {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.jing-selector__label {
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--color-text-secondary);
+    padding-left: 4px;
+}
+
+.jing-selector .options {
+    gap: 6px;
+}
+
+.jing-selector .option {
+    padding: 10px 8px;
+}
+
+.jing-total {
+    margin-top: 12px;
+    padding: 10px 12px;
+    background: rgba(251, 191, 36, 0.08);
+    border: 1px solid rgba(251, 191, 36, 0.15);
+    border-radius: var(--radius-sm);
+    font-size: 13px;
+    color: var(--color-text-secondary);
+    text-align: center;
+}
+
+.jing-total strong {
+    color: var(--color-gold);
+    font-weight: 700;
+}
+
+/* 重置按钮 */
+.reset-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    width: 100%;
+    margin-top: 20px;
+    padding: 14px;
+    background: transparent;
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius-md);
+    color: var(--color-text-secondary);
+    font-size: 14px;
+    font-weight: 500;
+    font-family: inherit;
+    cursor: pointer;
+    transition: all var(--transition-normal);
+}
+
+.reset-btn:hover {
+    border-color: var(--color-text-muted);
+    color: var(--color-text-primary);
+    background: rgba(255, 255, 255, 0.02);
+}
+
+.reset-btn:active {
+    transform: scale(0.98);
+}
+
+/* 空状态 / 暂无数据 */
+.no-result {
+    margin-top: 24px;
+    padding: 20px;
+    text-align: center;
+    color: var(--color-text-muted);
+    font-size: 14px;
+    border: 1px dashed var(--glass-border);
+    border-radius: var(--radius-md);
+}
+
+/* 禁用状态 */
+.step--disabled {
+    opacity: 0.4;
+    pointer-events: none;
+}
+
+/* 响应式 - 移动端适配 */
+@media (max-width: 480px) {
+    .app {
+        max-width: 100%;
+    }
+
+    .card {
+        padding: 20px;
+        border-radius: var(--radius-lg);
+    }
+
+    .options--3col {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .options--4col {
+        grid-template-columns: repeat(4, 1fr);
+    }
+
+    .header__title {
+        font-size: 24px;
+    }
+
+    .header__icon {
+        font-size: 40px;
+    }
+
+    .result__value {
+        font-size: 18px;
+    }
+
+    .step {
+        margin-bottom: 22px;
+    }
+
+    .option {
+        padding: 12px 8px;
+    }
+
+    .option__label {
+        font-size: 14px;
+    }
+
+    .jing-step {
+        padding: 12px;
+        margin-left: -4px;
+        margin-right: -4px;
+    }
+
+    .jing-selector .option {
+        padding: 8px 4px;
+    }
+
+    .jing-selector .option__label {
+        font-size: 13px;
+    }
+}
+
+/* 小屏幕手机 */
+@media (max-width: 360px) {
+    .card {
+        padding: 16px;
+    }
+
+    .options--4col {
+        grid-template-columns: repeat(4, 1fr);
+        gap: 4px;
+    }
+
+    .jing-selector .option {
+        padding: 6px 2px;
+    }
+
+    .header__title {
+        font-size: 20px;
+    }
+}
