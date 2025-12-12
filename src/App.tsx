@@ -30,13 +30,24 @@ const FU_JING_OPTIONS: OptionConfig<number>[] = [
 type Theme = 'light' | 'dark';
 
 function App() {
-    // 主題
+    // 主題（初始淺色）
     const [theme, setTheme] = useState<Theme>('light');
 
-    // 語言和模式
-    const [language, setLanguage] = useState<Language>('zh-CN');
-    const [mode, setMode] = useState<MahjongMode>('nanchang');
+    // 語言和模式（初始：台灣麻將 + 繁體）
+    const [language, setLanguage] = useState<Language>('zh-TW');
+    const [mode, setMode] = useState<MahjongMode>('taiwan');
     const t = getTranslations(language);
+
+    // 模式切換時自動切換語言
+    const handleModeChange = (newMode: MahjongMode) => {
+        setMode(newMode);
+        // 台灣模式 -> 繁體，南昌模式 -> 簡體
+        if (newMode === 'taiwan') {
+            setLanguage('zh-TW');
+        } else if (newMode === 'nanchang') {
+            setLanguage('zh-CN');
+        }
+    };
 
     // 状态
     const [role, setRole] = useState<Role | null>(null);
@@ -252,7 +263,7 @@ function App() {
                     <CustomSelect
                         options={modeOptions}
                         value={mode}
-                        onChange={(v) => setMode(v as MahjongMode)}
+                        onChange={(v) => handleModeChange(v as MahjongMode)}
                     />
                 </div>
                 <div className="settings-row">
