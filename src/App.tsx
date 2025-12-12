@@ -228,10 +228,19 @@ function App() {
         <div className="app">
             {/* 頂部工具欄 */}
             <div className="toolbar">
-                {/* 模式顯示 */}
-                <div className="toolbar__badge">
+                {/* 模式選擇 - 可點擊切換 */}
+                <button
+                    className="toolbar__mode-btn"
+                    onClick={() => {
+                        // 循環切換模式（目前只有一個，未來可擴展）
+                        const modes = AVAILABLE_MODES.map(m => m.value);
+                        const currentIndex = modes.indexOf(mode);
+                        const nextIndex = (currentIndex + 1) % modes.length;
+                        setMode(modes[nextIndex]);
+                    }}
+                >
                     🀄 {AVAILABLE_MODES.find(m => m.value === mode)?.label[language]}
-                </div>
+                </button>
 
                 {/* 語言切換 */}
                 <button className="toolbar__btn" onClick={toggleLanguage}>
