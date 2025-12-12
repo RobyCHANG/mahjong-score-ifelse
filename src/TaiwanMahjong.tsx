@@ -49,26 +49,10 @@ export function TaiwanMahjong({ language }: TaiwanMahjongProps) {
                 return prev.filter(i => i !== id);
             }
 
-            // 特殊邏輯：門清自摸與門清/自摸
-            if (id === 'menQingSelfDraw') {
-                // 選門清自摸時，移除單獨的門清和自摸
-                return [...prev.filter(i => i !== 'menQing' && i !== 'selfDraw'), id];
-            }
-
-            // 選自摸時，如果已經有門清，自動轉換為門清自摸
-            if (id === 'selfDraw') {
-                if (prev.includes('menQing')) {
-                    return [...prev.filter(i => i !== 'menQing' && i !== 'menQingSelfDraw'), 'menQingSelfDraw'];
-                }
-                return [...prev.filter(i => i !== 'menQingSelfDraw'), id];
-            }
-
-            // 選門清時，如果已經有自摸，自動轉換為門清自摸
-            if (id === 'menQing') {
-                if (prev.includes('selfDraw')) {
-                    return [...prev.filter(i => i !== 'selfDraw' && i !== 'menQingSelfDraw'), 'menQingSelfDraw'];
-                }
-                return [...prev.filter(i => i !== 'menQingSelfDraw'), id];
+            // 胡牌方式互斥（自摸、門清、門清自摸只能選一個）
+            const winIds = ['selfDraw', 'menQing', 'menQingSelfDraw'];
+            if (winIds.includes(id)) {
+                return [...prev.filter(i => !winIds.includes(i)), id];
             }
 
             // 莊家選項互斥（只能選一個）
