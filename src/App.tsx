@@ -25,7 +25,12 @@ const FU_JING_OPTIONS: OptionConfig<number>[] = [
     { value: 3, label: '3' },
 ];
 
+type Theme = 'light' | 'dark';
+
 function App() {
+    // 主題
+    const [theme, setTheme] = useState<Theme>('light');
+
     // 語言和模式
     const [language, setLanguage] = useState<Language>('zh-CN');
     const [mode, setMode] = useState<MahjongMode>('nanchang');
@@ -41,6 +46,11 @@ function App() {
 
     // 计算结果
     const [result, setResult] = useState<ScoreResult | null>(null);
+
+    // 應用主題到 document
+    useEffect(() => {
+        document.documentElement.setAttribute('data-theme', theme);
+    }, [theme]);
 
     // 動態選項配置
     const ROLE_OPTIONS: OptionConfig<Role>[] = [
@@ -77,7 +87,7 @@ function App() {
     // 获取可用的胡牌方式
     const availableWinEvents = role ? WIN_EVENT_OPTIONS[role] : [];
 
-    // 获取可用的牌型 (使用翻譯後的配置)
+    // 获取可用的牌型
     const availablePatterns = winEvent
         ? HAND_PATTERN_OPTIONS.filter(opt => {
             if (opt.value === 'jingDiao') {
@@ -157,12 +167,12 @@ function App() {
         setResult(null);
     };
 
-    // 切換語言
-    const toggleLanguage = () => {
-        setLanguage(prev => prev === 'zh-CN' ? 'zh-TW' : 'zh-CN');
+    // 切換主題
+    const toggleTheme = () => {
+        setTheme(prev => prev === 'light' ? 'dark' : 'light');
     };
 
-    // 渲染选项组
+    // 渲染選項按鈕組
     const renderOptions = <T,>(
         options: OptionConfig<T>[],
         selected: T | null,
@@ -228,24 +238,35 @@ function App() {
         <div className="app">
             {/* 頂部工具欄 */}
             <div className="toolbar">
-                {/* 模式選擇 - 可點擊切換 */}
-                <button
-                    className="toolbar__mode-btn"
-                    onClick={() => {
-                        // 循環切換模式（目前只有一個，未來可擴展）
-                        const modes = AVAILABLE_MODES.map(m => m.value);
-                        const currentIndex = modes.indexOf(mode);
-                        const nextIndex = (currentIndex + 1) % modes.length;
-                        setMode(modes[nextIndex]);
-                    }}
+                {/* 模式選擇 - 下拉式 */}
+                <select
+                    className="select-dropdown"
+                    value={mode}
+                    onChange={(e) => setMode(e.target.value as MahjongMode)}
                 >
-                    🀄 {AVAILABLE_MODES.find(m => m.value === mode)?.label[language]}
-                </button>
+                    {AVAILABLE_MODES.map(m => (
+                        <option key={m.value} value={m.value}>
+                            🀄 {m.label[language]}
+                        </option>
+                    ))}
+                </select>
 
-                {/* 語言切換 */}
-                <button className="toolbar__btn" onClick={toggleLanguage}>
-                    {language === 'zh-CN' ? '繁' : '简'}
-                </button>
+                <div className="toolbar__right">
+                    {/* 語言選擇 - 下拉式 */}
+                    <select
+                        className="select-dropdown select-dropdown--small"
+                        value={language}
+                        onChange={(e) => setLanguage(e.target.value as Language)}
+                    >
+                        <option value="zh-CN">简体</option>
+                        <option value="zh-TW">繁體</option>
+                    </select>
+
+                    {/* 日夜模式切換 */}
+                    <button className="theme-toggle" onClick={toggleTheme}>
+                        {theme === 'light' ? '🌙' : '☀️'}
+                    </button>
+                </div>
             </div>
 
             {/* 标题 */}
